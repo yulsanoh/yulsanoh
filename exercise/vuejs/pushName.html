@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- send-name 이벤트는 상위 데이터의 메소드인 pushName과 연결 -->
+      <name-list v-bind:items="list" v-on:send-name="pushName"></name-list>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      Vue.component("name-list", {
+        // props에 정의된 내용은 컴포넌트 안에서 상위 데이터를 받아올 때 사용함
+        // <name-list v-bind:'이 자리'="상위 데이터"></name-list>
+        props: ["items"],
+        // 컴포넌트 내의 data를 왜 함수형식으로 return 하는지는 아직 의문?
+        data: function () {
+          return {
+            name: "",
+          };
+        },
+        template: `<div>
+                    <input type="text" v-model="name" v-on:keyup.enter="btnClick"><button v-on:click="btnClick">입력</button>
+                    <div v-for="(name, idx) in items">{{ idx }}: {{ name }}</div>
+                </div>`,
+        // input 태그 내의 v-model="name"은 컴포넌트 내의 name 변수
+        // 마찬가지로 button에서의 v-on:click 이벤트는 컴포넌트 내의 btnClick 함수
+        // <div v-for="name in items">에서의 items는 props에 정의된 items이고 컴포넌트를 사용하는 태그에서 v-bind:items="item"을 통해 상위 데이터인 item 배열을 받아와서 items에 넣었기 때문에 이런 형식으로 불러오는 것이 가능해짐
+        methods: {
+          btnClick() {
+            // $emit의 의미?
+            // send-name 이라는 이벤트를 만듦
+            this.$emit("send-name", this.name);
+          },
+        },
+      });
+
+      let app = new Vue({
+        el: "#app",
+        data: {
+          list: ["홍길동", "오율산"],
+        },
+        methods: {
+          // 이 부분은 아무래도 상위 데이터에 데이터를 push 하려면 하위 컴포넌트에서는 진행할 수 없기 때문에 메소드를 여기에 정의해서 상위 데이터와 접근 가능하도록 만든 것 같음
+          pushName(name) {
+            this.list.push(name);
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
