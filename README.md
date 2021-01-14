@@ -12,7 +12,7 @@
 	- Vue.js
 	
 - 📫 이곳을 통해 저에게 연락해주세요!
-	- email: sanyulixxx@gmail.com
+	- yulsanohDev@gmail.com
 
 
 README.md 최신 업데이트 날짜: 2021-01-15
