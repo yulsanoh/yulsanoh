@@ -38,6 +38,6 @@ const userSchema = mongoose.Schema({
   },
 });
 
-const User = mongoose.model("User", userShcema); // model('모델이름', 스키마)
+const User = mongoose.model("User", userSchema); // model('모델이름', 스키마)
 
 module.exports = { User };
