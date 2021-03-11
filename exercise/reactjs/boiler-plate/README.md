@@ -54,3 +54,9 @@ nodemon을 이용하면 서버를 굳이 껏다키지 않아도 변화된 부분
 
 ### 시작할 때 nodemon으로 시작하기 위해서 script를 하나 더 생성
 "nodemon index.js"
+
+## Bcrypt로 비밀번호 암호화하기
+`npm install bcrypt --save`
+
+## login 기능 구현
+login route가 필요함

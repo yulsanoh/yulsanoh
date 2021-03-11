@@ -4,6 +4,8 @@
 // 와 같이 하나하나 지정하는 것을 schema를 통해 할 수 있다.
 
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
 
 const userSchema = mongoose.Schema({
   name: {
@@ -37,6 +39,32 @@ const userSchema = mongoose.Schema({
     type: Number,
   },
 });
+
+userSchema.pre("save", function (next) {
+  var user = this;
+
+  // 만약 비밀번호가 변경이 된다면
+  if (user.isModified("password")) {
+    // 비밀번호를 암호화 시킴
+    bcrypt.genSalt(saltRounds, function (err, salt) {
+      if (err) return next(err);
+      bcrypt.hash(user.password, salt, function (err, hash) {
+        if (err) return next(err);
+        user.password = hash;
+        next();
+      });
+    });
+  } else {
+    next();
+  }
+});
+
+userSchema.methods.comparePassword = function (plainPassword, cb) {
+  bcrypt.compare(plainpassword, this.password, function (err, isMatch) {
+    if (err) return cb(err);
+    cb(null, isMatch); // isMatch는 boolean형
+  });
+};
 
 const User = mongoose.model("User", userSchema); // model('모델이름', 스키마)
 
