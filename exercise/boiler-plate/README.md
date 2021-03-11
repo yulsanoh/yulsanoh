@@ -41,3 +41,16 @@ Client는 사용하고 있는 브라우저라고 생각하면 됨, 그리고 브
 
 * Body-parser Dependency를 다운받아서 사용
 
+## nodemon
+node 서버를 킨 다음에 코드를 변경하게되면 서버를 껏다 켜야 반영이 되는데
+
+nodemon을 이용하면 서버를 굳이 껏다키지 않아도 변화된 부분을 감지해서 변경해주는 역할을 하게 된다.
+
+`npm install nodemon --save-dev`
+
+`-dev`를 붙히는 이유는 local에서 할때만 사용하겠다 라고 지정한다고 함
+
+그래서 "Dependencies"가 아닌 "devDependencies"에 저장되게 된다.
+
+### 시작할 때 nodemon으로 시작하기 위해서 script를 하나 더 생성
+"nodemon index.js"

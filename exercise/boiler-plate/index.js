@@ -3,26 +3,25 @@ const app = express(); // 새로운 express app을 만듬
 const port = 5000; // 포트는 상관없음, 5000번 포트를 백서버로 둠
 
 const { User } = require("./models/User"); // User 모델 가져옴
-// const bodyParser = require("body-parser");
+const bodyParser = require("body-parser");
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+const config = require("./config/key");
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 const mongoose = require("mongoose");
 mongoose
-  .connect(
-    "mongodb+srv://yulsanoh:aktnftk@boilerplate.whhvr.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true,
-      useFindAndModify: false,
-    }
-  )
+  .connect(config.mongoURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+  })
   .then(() => console.log("MongoDB Connected..."))
   .catch((err) => console.log(err));
 
-app.get("/", (req, res) => res.send("Hello World!~~안녕하세요~")); // express 앱의 루트 디렉토리에 Hello World를 출력되게 하는 것
+app.get("/", (req, res) => res.send("Hello World!~~안녕하세요~ㅋㅋ")); // express 앱의 루트 디렉토리에 Hello World를 출력되게 하는 것
 
 app.post("/register", (req, res) => {
   // 회원가입을 위한 라우터
