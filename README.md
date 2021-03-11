@@ -6,10 +6,9 @@
 ### 안녕하세요! 👋
 
 - 🌱 저는 현재 이것들을 공부 중에 있습니다 :-)
-	- HTML
-	- CSS
 	- Javascript
 	- Vue.js
+	- React.js
 	
 - 📫 이곳을 통해 저에게 연락해주세요!
 	- yulsanohDev@gmail.com
