@@ -1,0 +1,22 @@
+<!-- HTML 문서 내에 자바스크립트를 삽입해서 실행하기(document.write 사용) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>팩토리얼 계산</title>
+</head>
+<body>
+    <script>
+        function fact(n) {
+            if(n <= 1) return n;
+            return n * fact(n - 1);
+        }
+        
+        for(var i = 1; i < 10; i++) {
+            document.write(i + "! = " + fact(i) + "<br />");
+        }
+    </script>
+</body>
+</html>
