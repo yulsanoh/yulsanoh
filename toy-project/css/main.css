@@ -71,11 +71,13 @@ a {
 
 .main-message {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   margin: 5px 0;
   height: 3em;
   font-size: 2.5rem;
+  font-weight: bold;
 }
 
 .main-message p {
@@ -86,6 +88,8 @@ a {
 
 /* section-1 */
 .description {
+  max-width: 1000px;
+  margin: 0 auto;
   padding: 0 1rem;
   font-size: 1.2rem;
   color: #888;
@@ -97,4 +101,95 @@ a {
   margin-right: 0.2em;
   font-size: 3rem;
   color: rgb(29, 29, 31);
+}
+
+/* section-2 */
+.main-message small {
+  display: block;
+  margin-bottom: 0.5em;
+  font-size: 1.2rem;
+}
+
+#scroll-section2 .main-message {
+  font-size: 3.5rem;
+}
+
+.desc-message {
+  width: 50%;
+  font-weight: bold;
+}
+
+.pin {
+  width: 1px;
+  height: 100px;
+  background-color: rgb(29, 29, 31);
+}
+
+.mid-message {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  font-size: 2rem;
+  color: #888;
+}
+
+.mid-message strong {
+  display: block;
+  color: rgb(29, 29, 31);
+}
+
+.canvas-caption {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  font-size: 1.2rem;
+  color: #888;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 7rem;
+  color: #fff;
+  background-color: #999;
+}
+
+/* 창 크기가 1024px 이상이면 아래 미디어쿼리가 적용됨 */
+@media (min-width: 1024px) {
+  #scroll-section-0 h1 {
+    font-size: 9vw;
+  }
+
+  .main-message {
+    font-size: 4vw;
+  }
+
+  .description {
+    font-size: 2rem;
+  }
+
+  .description strong {
+    font-size: 6rem;
+  }
+
+  #scroll-section-2 .main-message {
+    font-size: 6vw;
+  }
+
+  .main-message small {
+    font-size: 1.5vw;
+  }
+
+  .desc-message {
+    width: 20%;
+  }
+
+  .mid-message {
+    font-size: 4vw;
+  }
+
+  .canvas-caption {
+    font-size: 2rem;
+  }
 }
