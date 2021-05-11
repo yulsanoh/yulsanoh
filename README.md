@@ -6,15 +6,14 @@
 ### 안녕하세요! 👋
 
 - 🌱 저는 현재 이것들을 공부 중에 있습니다 :-)
+	- Apple website clone coding
 	- Javascript
-	- Vue.js
-	- React.js
 	
 - 📫 이곳을 통해 저에게 연락해주세요!
 	- yulsanohDev@gmail.com
 
 
-README.md 최신 업데이트 날짜: 2021-01-15
+README.md 최신 업데이트 날짜: 2021-05-12
 
 
 <!--
