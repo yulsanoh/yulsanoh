@@ -1,0 +1,8 @@
+body > div.container > footer.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 7rem;
+  color: white;
+  background-color: darkorange;
+}

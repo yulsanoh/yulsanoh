@@ -1,0 +1,41 @@
+body > div.container > nav.global-nav {
+  height: 44px;
+  padding: 0 1rem;
+}
+
+body > div.container > nav.local-nav {
+  height: 52px;
+  border-bottom: 1px solid #ddd;
+  padding: 0 1rem;
+}
+
+body > div.container > nav.global-nav > div.global-nav-links,
+body > div.container > nav.local-nav > div.local-nav-links {
+  display: flex;
+  align-items: center;
+  max-width: 1000px;
+  margin: 0 auto;
+  height: 100%;
+}
+
+body > div.container > nav.global-nav > div.global-nav-links {
+  justify-content: space-between;
+}
+
+body > div.container > nav.local-nav > div.local-nav-links > a {
+  font-size: 0.8rem;
+}
+
+body
+  > div.container
+  > nav.local-nav
+  > div.local-nav-links
+  > a:not(:first-child) {
+  margin-left: 2em;
+}
+
+body > div.container > nav.local-nav > div.local-nav-links > a.product-name {
+  margin-right: auto;
+  font-size: 1.4rem;
+  font-weight: bold;
+}

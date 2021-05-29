@@ -1,0 +1,87 @@
+body > div.container > section.scroll-section {
+  padding-top: 50vh;
+}
+
+body > div.container > section.scroll-section > div.main-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 5px 0;
+  height: 3em;
+  font-size: 2.5rem;
+}
+
+body > div.container > section.scroll-section > div.main-message > p {
+  line-height: 1.2;
+  font-weight: bold;
+  text-align: center;
+}
+
+body > div.container > section.scroll-section > div.main-message > p > small {
+  display: block;
+  margin-bottom: 0.5em;
+  font-size: 1.2rem;
+}
+
+body > div.container > section.scroll-section > div.sticky-elem {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+body > div.container > section.scroll-section > div.desc-message {
+  width: 50%;
+  font-weight: bold;
+}
+
+body > div.container > section.scroll-section > div.desc-message > div.pin {
+  width: 1px;
+  height: 100px;
+  background-color: rgb(29, 29, 31);
+}
+
+body > div.container > section.scroll-section > p.mid-message {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  font-size: 2rem;
+  color: #888;
+}
+
+body > div.container > section.scroll-section > p.mid-message > strong {
+  color: rgb(29, 29, 31);
+}
+
+body > div.container > section.scroll-section > p.canvas-caption {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  font-size: 1.2rem;
+  color: #888;
+}
+
+body > div.container > section#scroll-section-0 > h1 {
+  font-size: 4rem;
+  text-align: center;
+}
+
+body > div.container > section#scroll-section-1 > p.description {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  font-size: 1.2rem;
+  color: #888;
+}
+
+body > div.container > section#scroll-section-1 > p.description > strong {
+  float: left;
+  margin-right: 0.2em;
+  font-size: 3rem;
+  color: rgb(29, 29, 31);
+}
+
+body > div.container > section#scroll-section-2 > div.main-message {
+  font-size: 3.5rem;
+}
