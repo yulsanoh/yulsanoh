@@ -68,6 +68,21 @@ body#show-scene-3 > div.container > section#scroll-section-3 > div.sticky-elem {
   body
     > div.container
     > section#scroll-section-2
+    > div.desc-message.desc-message-b {
+    top: 20%;
+    left: 53%;
+  }
+
+  body
+    > div.container
+    > section#scroll-section-2
+    > div.desc-message.desc-message-c {
+    left: 55%;
+  }
+
+  body
+    > div.container
+    > section#scroll-section-2
     > div.main-message
     > p
     > small {

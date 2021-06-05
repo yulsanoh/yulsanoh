@@ -86,3 +86,19 @@ body > div.container > section#scroll-section-1 > p.description > strong {
 body > div.container > section#scroll-section-2 > div.main-message {
   font-size: 3.5rem;
 }
+
+body
+  > div.container
+  > section#scroll-section-2
+  > div.desc-message.desc-message-b {
+  top: 10%;
+  left: 40%;
+}
+
+body
+  > div.container
+  > section#scroll-section-2
+  > div.desc-message.desc-message-c {
+  top: 15%;
+  left: 45%;
+}
