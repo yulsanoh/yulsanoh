@@ -17,9 +17,14 @@
                 messageA: document.querySelector('#scroll-section-0 .main-message-a'),
                 messageB: document.querySelector('#scroll-section-0 .main-message-b'),
                 messageC: document.querySelector('#scroll-section-0 .main-message-c'),
-                messageD: document.querySelector('#scroll-section-0 .main-message-d')
+                messageD: document.querySelector('#scroll-section-0 .main-message-d'),
+                canvas: document.querySelector('#video-canvas-0'),
+                context: document.querySelector('#video-canvas-0').getContext('2d'),
+                videoImages: []
             },
             values: {
+                videoImageCount: 300,
+                imageSequence: [0, 299],
                 messageA_opacity_in: [0, 1, { start: 0.1, end: 0.2}],
                 messageA_opacity_out: [1, 0, { start: 0.25, end: 0.3}],
                 messageA_translateY_in: [20, 0, { start: 0.1, end: 0.2}],
@@ -38,7 +43,7 @@
                 messageD_opacity_in: [0, 1, { start: 0.7, end: 0.8}],
                 messageD_opacity_out: [1, 0, { start: 0.85, end: 0.9}],
                 messageD_translateY_in: [20, 0, { start: 0.7, end: 0.8}],
-                messageD_translateY_out: [0, -20, { start: 0.85, end: 0.9}],
+                messageD_translateY_out: [0, -20, { start: 0.85, end: 0.9}]
             }
         },
         {
@@ -97,6 +102,17 @@
             }
         },
     ];
+
+    function setCavnasImages() {
+        let imageElement;
+        for (let i = 0; i < sceneInfo[0].values.videoImageCount; i++) {
+            imageElement = new Image();
+            imageElement.src = `./video/001/IMG_${6726 + i}.JPG`;
+            sceneInfo[0].objs.videoImages.push(imageElement);
+        }
+        console.log(sceneInfo[0].objs.videoImages);
+    }
+    setCavnasImages();
 
     function setLayout() {
         // 각 scroll-section의 height 세팅
@@ -161,6 +177,9 @@
         switch (currentScene) {
             case 0:
                 // console.log('0 play');
+                let sequence = Math.round(calcValues(values.imageSequence, currentYOffset));
+                objs.context.drawImage(objs.videoImages[sequence], 0, 0);
+
                 if (scrollRatio <= 0.22) {
                     // in
                     objs.messageA.style.opacity = calcValues(values.messageA_opacity_in, currentYOffset);
