@@ -37,12 +37,23 @@ body
   > section.scroll-section
   > div.sticky-elem.sticky-elem-canvas {
   top: 0;
-  background-color: #ccc;
+  height: 100%;
+}
+
+body
+  > div.container
+  > section.scroll-section
+  > div.sticky-elem.sticky-elem-canvas
+  > canvas {
+  top: 50%;
+  left: 50%;
+  position: absolute;
 }
 
 body > div.container > section.scroll-section > div.desc-message {
   width: 50%;
   font-weight: bold;
+  opacity: 0;
 }
 
 body > div.container > section.scroll-section > div.desc-message > div.pin {
@@ -72,6 +83,9 @@ body > div.container > section.scroll-section > p.canvas-caption {
 }
 
 body > div.container > section#scroll-section-0 > h1 {
+  position: relative;
+  top: -10vh;
+  z-index: 5;
   font-size: 4rem;
   text-align: center;
 }
