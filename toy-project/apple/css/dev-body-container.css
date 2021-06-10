@@ -124,3 +124,12 @@ body
   top: 15%;
   left: 45%;
 }
+
+body > div.container > section#scroll-section-3 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+body > div.container > section#scroll-section-3 > canvas.image-blend-canvas {
+}

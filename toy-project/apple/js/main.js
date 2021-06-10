@@ -103,10 +103,18 @@
             scrollHeight: 0,
             objs: {
                 container: document.querySelector('#scroll-section-3'),
-                canvasCaption: document.querySelector('.canvas-caption')
+                canvasCaption: document.querySelector('.canvas-caption'),
+                canvas: document.querySelector('.image-blend-canvas'),
+                context: document.querySelector('.image-blend-canvas').getContext('2d'),
+                imagesPath: [
+                    './images/blend-image-1.jpg',
+                    './images/blend-image-2.jpg'
+                ],
+                images: []
             },
             values: {
-
+                rect1X: [0, 0, {start: 0, end: 0}],
+                rect2X: [0, 0, {start: 0, end: 0}]
             }
         },
     ];
@@ -125,6 +133,14 @@
             imageElement2.src = `./video/002/IMG_${7027 + i}.JPG`;
             sceneInfo[2].objs.videoImages.push(imageElement2);
         }
+
+        let imageElement3;
+        for (let i = 0; i < sceneInfo[3].objs.imagesPath.length; i++) {
+            imageElement3 = new Image();
+            imageElement3.src = sceneInfo[3].objs.imagesPath[i];
+            sceneInfo[3].objs.images.push(imageElement3);
+        }
+        console.log(sceneInfo[3].objs.images);
     }
     setCavnasImages();
 
@@ -247,6 +263,7 @@
                 // console.log('1 play');
                 break;
             case 2:
+                // console.log('2 play');
                 let sequence2 = Math.round(calcValues(values.imageSequence, currentYOffset));
                 objs.context.drawImage(objs.videoImages[sequence2], 0, 0);
 
@@ -290,10 +307,40 @@
                     objs.pinC.style.transform = `scaleY(${calcValues(values.pinC_scaleY, currentYOffset)})`;
                 }
 
-                // console.log('2 play');
                 break;
             case 3:
                 // console.log('3 play');
+                // 가로 / 세로 모두 꽉 차게 하기 위해서 여기서 세팅(계산 필요)
+                const widthRatio = window.innerWidth / objs.canvas.width;
+                const heightRatio = window.innerHeight / objs.canvas.height;
+                let canvasScaleRatio;
+
+                if (widthRatio <= heightRatio) {
+                    // 캔버스보다 브라우저 창이 홀쭉한 경우
+                    canvasScaleRatio = heightRatio;
+                    console.log('heightRatio로 결정');
+                } else {
+                    // 캔버스보다 브라우저 창이 납작한 경우
+                    canvasScaleRatio = widthRatio;
+                    console.log('widthRatio로 결정');
+                }
+
+                objs.canvas.style.transform = `scale(${canvasScaleRatio})`
+                objs.context.drawImage(objs.images[0], 0, 0);
+
+                // 캔버스 사이즈에 맞춰 가정한 innerWidth와 innerHeight
+                const recalculatedInnerWidth = window.innerWidth / canvasScaleRatio;
+                const recalculatedInnerHeight = window.innerHeight / canvasScaleRatio;
+
+                const whiteRectWidth = recalculatedInnerWidth * 0.15;
+                values.rect1X[0] = (objs.canvas.width - recalculatedInnerWidth) / 2;
+                values.rect1X[1] = values.rect1X[0] - whiteRectWidth;
+                values.rect2X[0] = values.rect1X[0] + recalculatedInnerWidth - whiteRectWidth;
+                values.rect2X[1] = values.rect2X[0] + whiteRectWidth;
+
+                objs.context.fillRect(values.rect1X[0], 0, parseInt(whiteRectWidth), objs.canvas.height);
+                objs.context.fillRect(values.rect2X[0], 0, parseInt(whiteRectWidth), objs.canvas.height);
+
                 break;
         }
     }
