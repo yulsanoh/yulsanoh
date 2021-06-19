@@ -1,4 +1,5 @@
 body > div.container > section.scroll-section {
+  position: relative;
   padding-top: 50vh;
 }
 
@@ -131,5 +132,12 @@ body > div.container > section#scroll-section-3 {
   align-items: center;
 }
 
-body > div.container > section#scroll-section-3 > canvas.image-blend-canvas {
+body
+  > div.container
+  > section#scroll-section-3
+  > canvas.image-blend-canvas.sticky {
+  position: fixed;
+  top: 0;
+  /* left: 0;
+  width: 100%; */
 }
