@@ -64,7 +64,7 @@ body > div.container > section.scroll-section > div.desc-message > div.pin {
 }
 
 body > div.container > section.scroll-section > p.mid-message {
-  max-width: 1000px;
+  width: 1000px;
   margin: 0 auto;
   padding: 0 1rem;
   font-size: 2rem;
@@ -77,7 +77,7 @@ body > div.container > section.scroll-section > p.mid-message > strong {
 
 body > div.container > section.scroll-section > p.canvas-caption {
   max-width: 1000px;
-  margin: 0 auto;
+  margin: -8em auto 0;
   padding: 0 1rem;
   font-size: 1.2rem;
   color: #888;

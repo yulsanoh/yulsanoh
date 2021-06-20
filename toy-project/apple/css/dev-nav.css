@@ -19,6 +19,13 @@ body > div.container > nav.local-nav {
   padding: 0 1rem;
 }
 
+body.local-nav-sticky > div.container > nav.local-nav {
+  position: fixed;
+  top: 0;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: saturate(180%) blur(15px);
+}
+
 body > div.container > nav.global-nav > div.global-nav-links,
 body > div.container > nav.local-nav > div.local-nav-links {
   display: flex;

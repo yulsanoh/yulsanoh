@@ -5,6 +5,11 @@
     let currentScene = 0;  // 현재 활성화 된 Scene(Scroll-section)
     let enterNewScene = false;  // 새로운 Scene이 시작된 순간 true
 
+    let acc = 0.1;
+    let delayedYOffset = 0;
+    let rafId;
+    let rafState;
+
     // 객체가 4개인 이유는 scroll-section의 갯수와 동일
     const sceneInfo = [
         {
@@ -117,6 +122,8 @@
                 rect2X: [0, 0, { start: 0, end: 0 }],
                 blendHeight: [0, 0, { start: 0, end: 0 }],
                 canvas_scale: [0, 0, { start: 0, end: 0 }],
+                canvasCaption_opacity: [0, 1, { start: 0, end: 0 }],
+                canvasCaption_translateY: [20, 0, { start:0, end: 0 }],
                 rectStartY: 0
             }
         },
@@ -145,7 +152,14 @@
         }
         console.log(sceneInfo[3].objs.images);
     }
-    setCavnasImages();
+
+    function checkMenu() {
+        if (yOffset > 44) {
+            document.body.classList.add('local-nav-sticky');
+        } else {
+            document.body.classList.remove('local-nav-sticky');
+        }
+    }
 
     function setLayout() {
         // 각 scroll-section의 height 세팅
@@ -209,13 +223,13 @@
         const scrollHeight = sceneInfo[currentScene].scrollHeight;
         const scrollRatio = currentYOffset / scrollHeight;
 
-        console.log(`yOffset: ${yOffset} currentScene: ${currentScene} currentYOffset: ${currentYOffset}`);
+        // console.log(`yOffset: ${yOffset} currentScene: ${currentScene} currentYOffset: ${currentYOffset}`);
 
         switch (currentScene) {
             case 0:
                 // console.log('0 play');
-                let sequence = Math.round(calcValues(values.imageSequence, currentYOffset));
-                objs.context.drawImage(objs.videoImages[sequence], 0, 0);
+                // let sequence = Math.round(calcValues(values.imageSequence, currentYOffset));
+                // objs.context.drawImage(objs.videoImages[sequence], 0, 0);
 
                 if (scrollRatio <= 0.22) {
                     // in
@@ -267,8 +281,8 @@
                 break;
             case 2:
                 // console.log('2 play');
-                let sequence2 = Math.round(calcValues(values.imageSequence, currentYOffset));
-                objs.context.drawImage(objs.videoImages[sequence2], 0, 0);
+                // let sequence2 = Math.round(calcValues(values.imageSequence, currentYOffset));
+                // objs.context.drawImage(objs.videoImages[sequence2], 0, 0);
 
                 if (scrollRatio <= 0.5) {
                     // in
@@ -437,6 +451,13 @@
                     if (scrollRatio > values.canvas_scale[2].end && values.canvas_scale[2].end > 0) {
                         objs.canvas.classList.remove('sticky');
                         objs.canvas.style.marginTop = `${scrollHeight * 0.4}px`;
+
+                        values.canvasCaption_opacity[2].start = values.canvas_scale[2].end;
+                        values.canvasCaption_opacity[2].end = values.canvasCaption_opacity[2].start + 0.1;
+                        values.canvasCaption_translateY[2].start = values.canvasCaption_opacity[2].start;
+                        values.canvasCaption_translateY[2].end = values.canvasCaption_opacity[2].end;
+                        objs.canvasCaption.style.opacity = calcValues(values.canvasCaption_opacity, currentYOffset);
+                        objs.canvasCaption.style.transform = `translate3d(0, ${calcValues(values.canvasCaption_translateY, currentYOffset)}%, 0)`
                     }
                 }
 
@@ -451,13 +472,13 @@
             prevScrollHeight += sceneInfo[i].scrollHeight;
         }
 
-        if (yOffset > prevScrollHeight + sceneInfo[currentScene].scrollHeight) {
+        if (delayedYOffset > prevScrollHeight + sceneInfo[currentScene].scrollHeight) {
             enterNewScene = true;
             currentScene++;
             document.body.setAttribute('id', `show-scene-${currentScene}`);
         }
 
-        if (yOffset < prevScrollHeight) {
+        if (delayedYOffset < prevScrollHeight) {
             enterNewScene = true;
             if (currentScene === 0) return;
             currentScene--;
@@ -469,9 +490,39 @@
         playAnimation();
     }
 
+    function loop() {
+        delayedYOffset = delayedYOffset + (yOffset - delayedYOffset) * acc;
+
+        if (!enterNewScene) {
+            if (currentScene === 0 || currentScene === 2) {
+                const currentYOffset = delayedYOffset - prevScrollHeight;
+                const objs = sceneInfo[currentScene].objs;
+                const values = sceneInfo[currentScene].values;
+                console.log('loop');
+                let sequence = Math.round(calcValues(values.imageSequence, currentYOffset));
+                if (objs.videoImages[sequence]) {
+                    objs.context.drawImage(objs.videoImages[sequence], 0, 0);
+                }
+            }
+        }
+        
+        rafId = requestAnimationFrame(loop);
+        
+        if (Math.abs(pageYOffset - delayedYOffset) < 1) {
+            cancelAnimationFrame(rafId);
+            rafState = false;
+        }
+    }
+
     window.addEventListener('scroll', () => {
         yOffset = window.pageYOffset;
         scrollLoop();
+        checkMenu();
+
+        if (!rafState) {
+            rafId = requestAnimationFrame(loop);
+            rafState = true;
+        }
     })
     window.addEventListener('load', () => {
         setLayout();
@@ -480,5 +531,9 @@
             playAnimation(i);
         }
     });
-    window.addEventListener('resize', setLayout);
+    window.addEventListener('resize', () => {
+        
+    });
+
+    setCavnasImages();
 })();

@@ -43,10 +43,12 @@ body#show-scene-3 > div.container > section#scroll-section-3 > div.sticky-elem {
 
   body > div.container > section.scroll-section > p.mid-message {
     font-size: 4vw;
+    padding: 0;
   }
 
   body > div.container > section.scroll-section > p.canvas-caption {
     font-size: 2rem;
+    padding: 0;
   }
 
   body > div.container > section#scroll-section-0 > h1 {
@@ -55,6 +57,7 @@ body#show-scene-3 > div.container > section#scroll-section-3 > div.sticky-elem {
 
   body > div.container > section#scroll-section-1 > p.description {
     font-size: 2rem;
+    padding: 0;
   }
 
   body > div.container > section#scroll-section-1 > p.description > strong {
