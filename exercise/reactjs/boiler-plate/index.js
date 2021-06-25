@@ -31,6 +31,9 @@ app.post('/register', (req, res) => {
     // 회원가입 시 필요한 정보들을 Client에서 가져오면 해당 데이터들을 데이터베이스에 넣어준다.
     const user = new User(req.body)
 
+
+
+    // userSchema에 저장
     // .save()는 mongoDB에서 오는 method
     user.save((err, userInfo) => {
         if(err) {
