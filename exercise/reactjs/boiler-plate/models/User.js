@@ -43,6 +43,7 @@ userSchema.pre('save', function(next) {
     // 비밀번호를 암호화 시킴
     var user = this;
 
+    // 비밀번호를 변경할 때 암호화 진행
     if(user.isModified('password')) {
         bcrypt.genSalt(saltRounds, function(err, salt) {
             if(err) {
@@ -59,9 +60,22 @@ userSchema.pre('save', function(next) {
                 next() 
             })
         })
+    } else {
+    // 비밀번호 외에 다른 것을 변경할 때
+        next()
     }
 
 })
+
+userSchema.methods.comparePassword = function(plainPassword, cb) {
+    // plainPassword > 1234567이라고 생각, 암호화 된 비밀번호 $2b$10$2fpDZIslg7JHu58KoUayyO/RQEPK1zsanKjCIyPfTQtmrN9VB15M6
+    bcrypt.compare(plainPassword, this.password, function(err, isMatch) {
+        if(err) {
+            return cb(err);
+        }
+        cb(null, isMatch);
+    })
+}
 
 const User = mongoose.model('User', userSchema)
 
