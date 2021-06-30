@@ -100,3 +100,27 @@ POSTMAN을 이용해서 password를 데이터 베이스로 보내면 그대로 �
   `npm install bcrypt --save`
 
 salt를 이용해서 비밀번호를 암호화 해야함, 그러기 위해서는 salt를 먼저 생성해야함
+
+## 토큰(Token)
+
+비밀 번호까지 같다면 토큰을 생성해주어야 하는데, 토큰 생성을 위해서 JsonWebToken 라이브러리를 설치하여야한다.
+
+`npm install jsonwebtoken --save`
+
+해당 라이브러리 사이트 주소: https://www.npmjs.com/package/jsonwebtoken
+
+## Cookie-parser
+
+`npm install cookie-parser`
+
+## 인증(Authentication) 기능 만들기
+
+페이지 이동을 할 때 마다 로그인이 되어있는지 유무와 관리자 유무를 체크할 때 사용함
+
+1. Cookie에 저장된 Token을 Server에 가져와서 복호화를 한다.
+2. 복호화를 하면 user.\_id가 나오는데 이것을 이용해서 데이터베이스 User Collection에서 유저를 찾은 후 쿠키에서 받아온 token이 유저도 갖고있는지 확인
+
+## 로그아웃 기능 만들기
+
+1. 로그아웃 Route 만들기
+2. 로그아웃하려는 유저를 DB에서 찾아서 유저의 토큰을 지워줌

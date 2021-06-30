@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 // 10자리의 salt
 const saltRounds = 10;
+const jwt = require('jsonwebtoken');
 
 const userSchema = mongoose.Schema({
     name: {
@@ -74,6 +75,41 @@ userSchema.methods.comparePassword = function(plainPassword, cb) {
             return cb(err);
         }
         cb(null, isMatch);
+    })
+}
+
+userSchema.methods.generateToken = function(cb) {
+    var user = this;
+    // jsonwebtoken을 이용해서 token을 생성하기
+    // 여기서 user._id는 database의 '_id'
+    var token = jwt.sign(user._id.toHexString(), 'secretToken')
+
+    // user._id와 'secretToken'을 합쳐서 = token을 생성
+    // 그리고 'secretToken'을 넣으면 user._id가 나옴
+
+    user.token = token;
+    user.save(function(err, user) {
+        if(err) {
+            return cb(err);
+        }
+        cb(null, user);
+    })
+}
+
+userSchema.statics.findByToken = function(token, cb) {
+    var user = this;
+
+    // token을 decode한다.
+    jwt.verify(token, 'secretToken', function(err, decoded) {
+        // user._id를 이용해서 유저를 찾은 후
+        // 클라이언트에서 가져온 token과 DB에 보관된 token이 일치하는지 확인
+
+        user.findOne({"_id": decoded, "token": token}, function(err, user) {
+            if(err) {
+                return cb(err);
+            }
+            cb(null, user);
+        })
     })
 }
 
