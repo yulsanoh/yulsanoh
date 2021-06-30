@@ -1,13 +1,10 @@
 # Boiler-plate
 
-## 폴더 및 파일 설명
-
-- index.js : 백엔드 메인 js 파일
-- models > User.js : MongoDB의 Model과 Schema
-
-## Node.js와 Express.js 다운로드
+## 📚 백엔드 부분
 
 ---
+
+## Node.js와 Express.js 다운로드
 
 ### Node.js가 다운로드 되어 있는지 확인하는 방법
 
@@ -124,3 +121,136 @@ salt를 이용해서 비밀번호를 암호화 해야함, 그러기 위해서는
 
 1. 로그아웃 Route 만들기
 2. 로그아웃하려는 유저를 DB에서 찾아서 유저의 토큰을 지워줌
+
+---
+
+## 📚 프론트엔드 부분
+
+---
+
+## ReactJS
+
+ReactJS는 프레임워크가 아니다. 페이스북에서 2013년에 릴리즈된 라이브러리임
+
+특징적인 부분은 컴포넌트(Components)로 이루어져있고 module과 비슷하게 재사용성이 뛰어남
+
+### Real DOM과 Virtual DOM
+
+ReactJS는 Virtual DOM을 사용하며 Real DOM과의 차이점은 아래와 같다.
+
+- Real DOM
+
+  - 만약 10개의 리스트가 있다.
+
+  - 그 중에 한가지의 리스트만 Update 됨
+
+  - 전체 리스트를 다시 Reload 해야함
+
+- Virtual DOM
+
+  - 만약 10개의 리스트가 있다.
+
+  - 그 중에 한가지의 리스트만 Update 됨
+
+  - 바뀐 한가지의 리스트만 DOM에서 Update 해준다.
+
+## ReactJS 시작하기
+
+### Babel
+
+Babel은 최신 자바스크립트 문법을 지원하지 않는 브라우저들을 위해서 최신 자바스크립트 문법을 구형 브라우저에서도 사용할 수 있게 변환시켜주는 역할을 한다.
+
+### Webpack
+
+Webpack은 많은 module들을 합쳐서 간단하게 만들어주는 역할을 함.
+
+Webpack이 관리하는 폴더는 src 폴더뿐이며 public 폴더는 관리해주지 않음
+
+그렇기에 JS, CSS 파일들과 이미지 파일 같은 부분은 src 폴더에 넣어주는것이 좋음
+
+### ReactJS 설치하는 방법
+
+`npx create-react-app .`, 끝에 .까지 입력해주어야 함
+
+#### 기존의 설치방법
+
+원래 create-react-app을 할 때, `npm install -g create-react-app` 명령어를 입력해서 했었음
+
+### ReactJS 실행
+
+`npm run start`
+
+server에도 동일하게 구성했듯이 package.json에 정의가 되어있음
+
+### Extensions
+
+익스텐션의 검색창에 `es7`이라고 검색을 하면 `ES7 React/Redux/GraphQL/React-Native snippets`라는 확장팩이 존재하는데
+
+이 확장팩을 깔게되면 `rfce`로 간편하게 기본 구성요소를 불러올 수 있다.
+
+- `rcc`는 클래스 컴포넌트 구성요소를 세팅해줌
+
+### App.js React-Router-Dom
+
+ReactJS에서는 페이지 이동을 할 때 React Router Dom 이라는 것을 사용한다.
+
+설치 명령어는 `npm install react-router-dom --save`
+
+기본 사용법이 작성된 페이지: https://reactrouter.com/web/example/basic
+
+## Axios 설치
+
+`npm install axios --save`
+
+## CORS 이슈와 Proxy 설정
+
+### CORS 이슈(**매우 중요**)
+
+한 출처(도메인, 프로토콜, 포트)에서 다른 출처의 데이터를 주고받는 것을 아무나 어느곳에서든 할 수 있게 된다면 보안적인 이슈가 발생할 수 있음. 그렇기 때문에 웹 애플리케이션은 리소스가 자신의 출처와 다를 때 교차 출처 HTTP 요청을 실행함
+
+### Proxy 설정
+
+CORS 이슈를 해결하는 방법으로는 여러가지가 있지만 해당 강의는 이 중에 Proxy를 사용하는 방법을 택함
+
+먼저 설정을 위해서는 모듈을 다운로드 받아야함
+
+`npm install http-proxy-middleware --save`
+
+## Concurrently
+
+- Concurrently란 여러개의 commands를 동시에 작동 시킬 수 있는 Tool.
+
+`npm install concurrently --save`
+
+## CSS Framework
+
+- CSS Framework를 쓰는 이유?
+  기능을 만드는데 더욱 집중하기 위해서
+
+- CSS Framework 종류 for ReactJS
+  1. Material UI
+  2. React Bootstrap
+  3. Semantic UI
+  4. Ant Design
+  5. Meterialize
+
+해당 강의에서는 4번 항목인 Ant Design을 사용함
+(링크: https://ant.design/)
+
+### Ant design 설치 방법
+
+`npm install antd --save`
+
+## Redux
+
+상태 관리 라이브러리
+
+다운 받아야 할 Dependency들
+
+1. redux
+2. react-redux
+3. redux-promis
+4. redux-thunk
+
+한번에 설치하는 방법
+`npm install redux react-redux redux-promise redux-thunk --save`
